@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Hit Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1DB954, #191414);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Glassmorphic Container */
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 14px;
+            color: #b3b3b3;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 14px;
+            text-align: left;
+            width: 100%;
+            font-weight: 400;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid #1DB954;
+        }
+
+        /* Animated Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #1DB954, #17a247);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, background 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #17a247, #138a3e);
+        }
+
+        /* Prediction Result */
+        .result {
+            font-size: 1.6em;
+            font-weight: 600;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: 0.5s ease-in-out;
+        }
+
+        .hit {
+            background: rgba(40, 167, 69, 0.8);
+            color: white;
+            animation: glowHit 1s infinite alternate;
+        }
+
+        .flop {
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            animation: glowFlop 1s infinite alternate;
+        }
+
+        /* Glow Animations */
+        @keyframes glowHit {
+            from {
+                box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(40, 167, 69, 1);
+            }
+        }
+
+        @keyframes glowFlop {
+            from {
+                box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(220, 53, 69, 1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎶 Music Hit Predictor</h1>
+        <p>Enter the song features below to predict if it will be a hit or flop.</p>
+
+        <form method="post">
+            <label>Instrumentalness:</label>
+            <input type="number" step="0.01" name="instrumentalness" required>
+
+            <label>Danceability:</label>
+            <input type="number" step="0.01" name="danceability" required>
+
+            <label>Loudness:</label>
+            <input type="number" step="0.01" name="loudness" required>
+
+            <label>Valence:</label>
+            <input type="number" step="0.01" name="valence" required>
+
+            <label>Acousticness:</label>
+            <input type="number" step="0.01" name="acousticness" required>
+
+            <label>Key (0-11):</label>
+            <input type="number" min="0" max="11" name="key" required>
+
+            <button type="submit">🎵 Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {% if 'Hit' in prediction %}hit{% else %}flop{% endif %}">
+                🎵 Prediction: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
