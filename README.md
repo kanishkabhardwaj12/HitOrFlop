@@ -1,8 +1,4 @@
-Your `main.py` script processes multiple datasets, extracts selected song features, trains a **Random Forest Classifier**, evaluates its accuracy, and saves both the trained model and scaler.  
-
-### 🔥 **Suggested GitHub Repo Description:**  
-
-# 🎵 Hit or Flop: AI-Powered Song Popularity Predictor  
+# 🎵 Hit or Flop
 
 **HitOrFlop** is a machine learning project that predicts whether a song will be a *hit* or *flop* based on its musical attributes. The model is trained using **decades of Spotify song data** and leverages **Random Forest Classification** for predictions.  
 
